@@ -241,8 +241,8 @@
 </template>
 
 <script>
-import axios from "@/axios/myAxios.js";
 import * as analysis from "@/util/analysisExcel.js";
+import axios from "axios";
 export default {
   props: ["eid"],
   data() {

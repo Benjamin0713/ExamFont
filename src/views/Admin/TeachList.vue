@@ -62,8 +62,6 @@
 export default {
   data() {
     return {
-      // 获取用户列表的参数对象
-      query: "",
       userlist: [],
       // 控制添加用户对话框的显示与隐藏
       addDialogVisible: false,
@@ -88,7 +86,7 @@ export default {
   },
   methods: {
     async getUserList() {
-      const data = await this.$http.get("/admin/teachers");
+      const data = await this.$http.get("/user/getAll");
       console.log(data);
       if (data.status !== 200) {
         return this.$message.error("获取用户列表失败！");

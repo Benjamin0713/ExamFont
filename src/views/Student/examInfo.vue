@@ -106,7 +106,6 @@
             <v-textarea
               outlined
               label="你的回答"
-              
               v-model="subject.answer"
             ></v-textarea>
           </v-card-actions>
@@ -145,7 +144,8 @@
 </template>
 
 <script>
-import axios from "@/axios/myAxios.js";
+import axios from "axios";
+
 export default {
   props: ["eid"],
   created() {

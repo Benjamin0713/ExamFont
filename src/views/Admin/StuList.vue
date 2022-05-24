@@ -12,15 +12,20 @@
       <!-- 搜索与添加区域 -->
       <el-row :gutter="50">
         <el-col :span="4">
-          <el-button type="primary" @click="addDialogVisible = true">添加学生</el-button>
+          <el-button type="primary" @click="addDialogVisible = true"
+          >添加学生
+          </el-button
+          >
         </el-col>
       </el-row>
 
       <!-- 用户列表区域 -->
       <el-table :data="userlist" border stripe>
-        <el-table-column type="index"></el-table-column>
-        <el-table-column label="姓名" prop="user.name"></el-table-column>
-        <el-table-column label="学号" prop="user.userId"></el-table-column>
+        <!--        <el-table-column type="index"></el-table-column>-->
+        <el-table-column prop="id" label="序号" sortable width="75px">
+        </el-table-column>
+        <el-table-column label="姓名" prop="name"></el-table-column>
+        <el-table-column label="学号" prop="userId"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <!-- 删除按钮 -->
@@ -71,8 +76,6 @@ import qs from "qs";
 export default {
   data() {
     return {
-      // 获取用户列表的参数对象
-      query: "",
       userlist: [],
       // 控制添加用户对话框的显示与隐藏
       addDialogVisible: false,
@@ -96,11 +99,15 @@ export default {
   },
   methods: {
     async getUserList() {
-      const data = await this.$http.get("/admin/students");
+      const _this = this;
+      const data = await axios.get("/user/getAll");
       if (data.status !== 200) {
         return this.$message.error("获取用户列表失败！");
       }
-      this.userlist = data.data.data.studentList;
+      _this.userlist = data.data.data;
+      console.log(_this.userlist);
+      // this.userlist = data.data.data.studentList;
+      // console.log(data)
     },
     // 监听添加用户对话框的关闭事件
     addDialogClosed() {
@@ -148,5 +155,4 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

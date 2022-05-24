@@ -45,15 +45,16 @@
             </v-list-item-content>
             <div class="text-center">
               <v-dialog v-model="dialog" width="500" v-if="!exam.isSubmit">
-                <template v-slot:activator="{ on, attrs }" >
-                  <v-btn color="red lighten-2" dark v-bind="attrs" v-on="on" 
-                    >进入考试</v-btn
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn color="red lighten-2" dark v-bind="attrs" v-on="on"
+                  >进入考试
+                  </v-btn
                   >
                 </template>
 
                 <v-card>
                   <v-card-title class="headline grey lighten-2" primary-title
-                    >考前须知
+                  >考前须知
                   </v-card-title>
 
                   <v-card-text>请确保网络环境的问题</v-card-text>
@@ -80,7 +81,8 @@
 </template>
 
 <script>
-import axios from "@/axios/myAxios.js";
+import axios from "axios";
+
 export default {
   created() {
     this.getExamList();

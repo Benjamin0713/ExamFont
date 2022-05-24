@@ -59,8 +59,8 @@
 </template>
 
 <script>
-import axios from "@/axios/myAxios.js";
 import router from "../../router";
+import axios from "axios";
 export default {
   data: () => ({
     drawer: null,

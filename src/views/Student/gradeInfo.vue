@@ -57,7 +57,8 @@
 </template>
 
 <script>
-import axios from "@/axios/myAxios.js";
+import axios from "axios";
+
 export default {
   created() {
     this.getGradeNetWork();

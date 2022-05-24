@@ -84,11 +84,18 @@ export default {
               path: "teachList"
             }
           ]
+        },
+        {
+          id: 2,
+          icon: "el-icon-document",
+          authName: "题库管理",
+          children: [
+            {
+              authName: "添加题库"
+            }
+          ]
         }
       ],
-      iconsObj: {
-        "1": "iconfont icon-user"
-      },
       // 是否折叠
       isCollapse: false,
       // 被激活的链接地址

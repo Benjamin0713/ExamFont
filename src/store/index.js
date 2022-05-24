@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import * as types from "./type";
-import axios from "../axios/myAxios";
 Vue.use(Vuex);
 const myState = {
   exception: { message: null }

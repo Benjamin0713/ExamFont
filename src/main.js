@@ -10,8 +10,17 @@ import "./plugins/element";
 import "./assets/fonts/iconfont.css";
 // 配置axios
 import axios from "axios";
-Vue.prototype.$http = axios;
-
+import * as types from "./store/type";
+// API接口基准地址--配置请求的根路径
+axios.defaults.baseURL = "http://127.0.0.1:8888";
+// axios请求拦截器
+axios.interceptors.request.use(config => {
+  console.log(config);
+  // 在最后必须 return config
+  config.headers.token = window.sessionStorage.getItem(types.author);
+  return config;
+});
+Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
 
 new Vue({
@@ -20,3 +29,10 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount("#app");
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
+  next();
+});

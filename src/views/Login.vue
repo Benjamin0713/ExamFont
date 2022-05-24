@@ -79,10 +79,10 @@
 </template>
 
 <script>
-import axios from "../axios/myAxios.js";
 import * as types from "../store/type.js";
 import { updateRouters } from "../router";
 import qs from "qs";
+import axios from "axios";
 export default {
   name: "Login",
   data() {
@@ -132,11 +132,11 @@ export default {
       console.log(resp);
       if (resp != null) {
         //  置于本地session仓库
-        let token = resp.headers["authorization"];
+        let token = resp.data.data.token;
         let role = resp.data.data.role;
         sessionStorage.setItem(types.author, token);
         sessionStorage.setItem(types.role, role);
-        // console.log(token);
+        console.log(token);
         // console.log(role);
       } else {
         console.log("响应为空");

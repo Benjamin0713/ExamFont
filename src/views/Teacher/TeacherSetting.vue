@@ -36,7 +36,8 @@
 </template>
 
 <script>
-import axios from "@/axios/myAxios.js";
+import axios from "axios";
+
 export default {
   name: "setting",
   data() {
