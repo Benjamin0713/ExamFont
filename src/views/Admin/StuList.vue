@@ -21,9 +21,8 @@
 
       <!-- 用户列表区域 -->
       <el-table :data="userlist" border stripe>
-        <!--        <el-table-column type="index"></el-table-column>-->
-        <el-table-column prop="id" label="序号" sortable width="75px">
-        </el-table-column>
+        <el-table-column type="index"></el-table-column>
+        <!--        <el-table-column prop="id" label="序号" sortable width="75px"></el-table-column>-->
         <el-table-column label="姓名" prop="name"></el-table-column>
         <el-table-column label="学号" prop="userId"></el-table-column>
         <el-table-column label="操作">
@@ -31,10 +30,11 @@
             <!-- 删除按钮 -->
             <el-button
               type="danger"
-              icon="el-icon-delete"
               size="medium"
-              @click="removeUserById(scope.row.user.userId)"
-            ></el-button>
+              @click="removeUserById(scope.row)"
+            >删除
+            </el-button>
+            <el-button type="primary" size="medium" @click="MakeTea(scope.row)">管理</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -100,7 +100,7 @@ export default {
   methods: {
     async getUserList() {
       const _this = this;
-      const data = await axios.get("/user/getAll");
+      const data = await axios.get("/user/get_all_students");
       if (data.status !== 200) {
         return this.$message.error("获取用户列表失败！");
       }
@@ -119,38 +119,61 @@ export default {
       this.addDialogVisible = false;
       // this.userlist = resp.data.data.studentList;
       // 重新获取用户列表数据
-      // this.getUserList();
+      await this.getUserList();
+    },
+    // 根据Id删除对应的用户信息
+    async removeUserById(row) {
+      // 弹框询问用户是否删除数据
+      console.log(row.userId);
+      const confirmResult = await this.$confirm(
+        "此操作将永久删除该用户, 是否继续?",
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        }
+      ).catch(err => err);
+      // 如果用户确认删除，则返回值为字符串 confirm
+      // 如果用户取消了删除，则返回值为字符串 cancel
+      // console.log(confirmResult)
+      if (confirmResult !== "confirm") {
+        return this.$message.info("已取消删除");
+      }
+
+      const data = await axios.delete("/user/delete/" + row.userId);
+
+      if (data.status !== 200) {
+        return this.$message.error("删除用户失败！");
+      }
+
+      this.$message.success("删除用户成功！");
+      // this.userlist = data.data.data.studentList;
+      await this.getUserList();
+    },
+    async MakeTea(row) {
+      console.log(row.userId);
+      const confirmResult = await this.$confirm(
+        "此操作将修改该用户身份, 是否继续?",
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        }
+      ).catch(err => err);
+      if (confirmResult !== "confirm") {
+        return this.$message.info("已取消修改");
+      }
+      const data = await axios.get("/user/modify_type/" + row.userId);
+      if (data.status !== 200) {
+        return this.$message.error("修改用户失败！");
+      }
+
+      this.$message.success("修改用户成功！");
+      // this.userlist = data.data.data.studentList;
+      await this.getUserList();
     }
-    // ,
-    // // 根据Id删除对应的用户信息
-    // async removeUserById(id) {
-    //   // 弹框询问用户是否删除数据
-    //   const confirmResult = await this.$confirm(
-    //     "此操作将永久删除该用户, 是否继续?",
-    //     "提示",
-    //     {
-    //       confirmButtonText: "确定",
-    //       cancelButtonText: "取消",
-    //       type: "warning"
-    //     }
-    //   ).catch(err => err);
-    //
-    //   // 如果用户确认删除，则返回值为字符串 confirm
-    //   // 如果用户取消了删除，则返回值为字符串 cancel
-    //   // console.log(confirmResult)
-    //   if (confirmResult !== "confirm") {
-    //     return this.$message.info("已取消删除");
-    //   }
-    //
-    //   const data = await this.$http.delete("admin/students/" + id);
-    //
-    //   if (data.status !== 200) {
-    //     return this.$message.error("删除用户失败！");
-    //   }
-    //
-    //   this.$message.success("删除用户成功！");
-    //   this.userlist = data.data.data.studentList;
-    // }
   }
 };
 </script>

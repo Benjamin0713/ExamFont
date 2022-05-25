@@ -8,28 +8,29 @@
       </v-card-title>
       <v-card-text class="headline font-weight-bold">
         <v-text-field
-          label="账号"
+          label="学号"
           :rules="rules"
           hide-details="auto"
           disabled=""
-          v-model="data.myInfo.user.number"
+          v-model="data.user.userId"
         ></v-text-field>
         <v-text-field
           label="角色"
           :rules="rules"
           hide-details="auto"
           disabled=""
-          v-model="data.myInfo.user.role"
+          v-model="data.user.role"
         ></v-text-field>
         <v-text-field
           label="姓名"
           required
-          v-model="data.myInfo.user.name"
+          v-model="data.user.name"
         ></v-text-field>
       </v-card-text>
       <v-card-actions>
         <v-btn depressed small color="primary" @click="updateInfo"
-          >修改个人信息</v-btn
+        >修改密码
+        </v-btn
         >
       </v-card-actions>
     </v-card>
@@ -38,7 +39,7 @@
 
 <script>
 import axios from "axios";
-
+import * as types from "../../store/type.js";
 export default {
   created() {
     this.getStudentInfo();
@@ -46,48 +47,42 @@ export default {
   data: () => ({
     msg: null,
     data: {
-      myInfo: {
-        user: {
-          name: null,
-          number: 0,
-          insertTime: null
-        }
+      user: {
+        name: "1",
+        password: "",
+        role: "1",
+        userId: "0"
       }
     },
-    rules: [
-      value => !!value || "不能为空."
-      // value => (value && value.length > 16) || "学号不能超过四个字符"
-    ]
+    rules: [value => !!value || "不能为空."]
   }),
   methods: {
-    formatDate(date) {
-      return date.replace("T", " ");
-    },
     // 获取用户信息
     async getStudentInfo() {
-      let resp = await axios.get("/students/myInfo");
+      let userId = sessionStorage.getItem(types.userId);
+      console.log(userId);
+      let resp = await axios.get("/user/view/id/" + userId);
       if (resp != null) {
-        console.log(resp.data);
-        this.data.myInfo.user = resp.data.data.myInfo.user;
-        console.log(this.data);
+        console.log(1111, this.data.user);
+        this.data.user.userId = resp.data.data.userId;
       } else {
         console.log("响应为空");
       }
-    },
-    //修改用户信息
-    async updateStudentInfo(student) {
-      let resp = await axios.patch("/students/myInfo", student);
-      if (resp != null) {
-        console.log("resp");
-      } else {
-        console.log("响应为空");
-      }
-    },
-    updateInfo() {
-      console.log("click updateInfo");
-      console.log(this.data.myInfo);
-      this.updateStudentInfo(this.data.myInfo);
     }
+    // //修改用户信息
+    // async updateStudentInfo(student) {
+    //   let resp = await axios.patch("/students/myInfo", student);
+    //   if (resp != null) {
+    //     console.log("resp");
+    //   } else {
+    //     console.log("响应为空");
+    //   }
+    // },
+    // updateInfo() {
+    //   console.log("click updateInfo");
+    //   console.log(this.data.myInfo);
+    //   this.updateStudentInfo(this.data.myInfo);
+    // }
   }
 };
 </script>

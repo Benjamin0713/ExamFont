@@ -138,10 +138,9 @@ export default {
         //  置于本地session仓库
         let token = resp.data.data.token;
         let role = resp.data.data.user.type;
+        sessionStorage.setItem(types.userId, user.id);
         sessionStorage.setItem(types.author, token);
         sessionStorage.setItem(types.role, role);
-        // console.log(token);
-        // console.log("1111"+role);
       } else {
         console.log("响应为空");
       }
