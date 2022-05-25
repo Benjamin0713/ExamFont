@@ -21,16 +21,16 @@
         />
       </div>
 
-      <v-spacer></v-spacer>
+<!--      <v-spacer></v-spacer>-->
 
-      <v-btn
-        href="https://github.com/SanguineWang/Examination-System-Vue"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">our Github</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+<!--      <v-btn-->
+<!--        href="https://github.com/SanguineWang/Examination-System-Vue"-->
+<!--        target="_blank"-->
+<!--        text-->
+<!--      >-->
+<!--        <span class="mr-2">our Github</span>-->
+<!--        <v-icon>mdi-open-in-new</v-icon>-->
+<!--      </v-btn>-->
     </v-app-bar>
     <v-main>
       <v-container class="fill-height" fluid>
