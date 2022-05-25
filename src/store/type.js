@@ -1,6 +1,8 @@
 // sessionStorge
 export const author = "Autorization";
 export const role = "Role";
+export const rspCode = "rspCode";
+export const rspMsg = "rspMsg";
 //
 export const teacherRole = "1";
 export const studentRole = "0";

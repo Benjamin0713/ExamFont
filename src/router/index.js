@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "../views/Login.vue";
+import Register from "../views/Register.vue";
 import * as tpyes from "../store/type";
 import Home from "../views/Admin/Home.vue";
 import Welcome from "../views/Admin/Welcome.vue";
@@ -15,6 +16,11 @@ const routes = [
     path: "/",
     name: "Login",
     component: Login
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register
   }
 ];
 let teacherRouters = [

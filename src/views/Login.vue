@@ -68,6 +68,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
+                <v-btn color="black darken-1" text @click="register">注册</v-btn>
                 <v-btn color="black darken-1" text @click="login">登入</v-btn>
               </v-card-actions>
             </v-card>
@@ -120,6 +121,9 @@ export default {
         }
       });
     },
+    register() {
+      this.$router.push("/register");
+    },
     //登录
     async userLogin(user) {
       const resp = await axios.post(
@@ -133,11 +137,11 @@ export default {
       if (resp != null) {
         //  置于本地session仓库
         let token = resp.data.data.token;
-        let role = resp.data.data.role;
+        let role = resp.data.data.user.type;
         sessionStorage.setItem(types.author, token);
         sessionStorage.setItem(types.role, role);
-        console.log(token);
-        // console.log(role);
+        // console.log(token);
+        // console.log("1111"+role);
       } else {
         console.log("响应为空");
       }
