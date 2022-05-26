@@ -9,21 +9,20 @@
       <v-card-text class="headline font-weight-bold">
         <v-text-field
           label="学号"
-          :rules="rules"
           hide-details="auto"
           disabled=""
           v-model="data.user.userId"
         ></v-text-field>
         <v-text-field
           label="角色"
-          :rules="rules"
           hide-details="auto"
           disabled=""
-          v-model="data.user.role"
+          v-model="data.user.type"
         ></v-text-field>
         <v-text-field
           label="姓名"
           required
+          disabled=""
           v-model="data.user.name"
         ></v-text-field>
       </v-card-text>
@@ -48,13 +47,13 @@ export default {
     msg: null,
     data: {
       user: {
-        name: "1",
+        name: "",
         password: "",
-        role: "1",
-        userId: "0"
+        type: "0",
+        userId: ""
       }
-    },
-    rules: [value => !!value || "不能为空."]
+    }
+    // rules: [value => !!value || "不能为空."]
   }),
   methods: {
     // 获取用户信息
@@ -63,26 +62,15 @@ export default {
       console.log(userId);
       let resp = await axios.get("/user/view/id/" + userId);
       if (resp != null) {
-        console.log(1111, this.data.user);
-        this.data.user.userId = resp.data.data.userId;
+        console.log(resp);
+        this.data.user = resp.data.data;
+        if (resp.data.data.type === 0) {
+          this.data.user.type = "学生";
+        }
       } else {
         console.log("响应为空");
       }
     }
-    // //修改用户信息
-    // async updateStudentInfo(student) {
-    //   let resp = await axios.patch("/students/myInfo", student);
-    //   if (resp != null) {
-    //     console.log("resp");
-    //   } else {
-    //     console.log("响应为空");
-    //   }
-    // },
-    // updateInfo() {
-    //   console.log("click updateInfo");
-    //   console.log(this.data.myInfo);
-    //   this.updateStudentInfo(this.data.myInfo);
-    // }
   }
 };
 </script>

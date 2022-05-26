@@ -31,14 +31,6 @@
       <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
         <span class="hidden-sm-and-down">在线考试系统-教师后台</span>
       </v-toolbar-title>
-      <v-text-field
-        flat
-        solo-inverted
-        hide-details
-        prepend-inner-icon="mdi-magnify"
-        label="Search"
-        class="hidden-sm-and-down"
-      ></v-text-field>
       <v-spacer></v-spacer>
       <v-btn class="ma-2" outlined @click="logOutAndClearStorage">LogOut</v-btn>
       <v-btn icon large>
@@ -68,8 +60,7 @@ export default {
     myInfo: {},
     navItems: [
       { icon: "mdi-history", text: "考试管理", path: "/teacher/exam" },
-      { icon: "mdi-contacts", text: "个人信息管理", path: "/teacher/myInfo" },
-      { icon: "mdi-content-copy", text: "设置", path: "/teacher/setting" }
+      { icon: "mdi-contacts", text: "个人信息管理", path: "/teacher/myInfo" }
     ]
   }),
   components: {},
@@ -90,16 +81,6 @@ export default {
     logOutAndClearStorage() {
       sessionStorage.clear();
       this.$router.push("/");
-    },
-    //获取个人信息
-    async getMyInfo() {
-      let resp = await axios.get("teacher/myInfo");
-      this.myInfo = resp.data.data.myInfo;
-    },
-    //更新个人信息
-    async updateMyInfo() {
-      let resp = await axios.patch("teacher/myInfo");
-      this.myInfo = resp.data.data.myInfo;
     }
   }
 };

@@ -1,90 +1,75 @@
 <template>
-  <div class="teacherInfo">
-    <v-form v-model="valid">
-      <v-container>
-        <v-row align="center" class="mx-auto" justify="center">
-          <v-toolbar-title><h3>个人信息</h3> </v-toolbar-title>
-          <v-spacer></v-spacer>
-        </v-row>
-
-        <v-row>
-          <v-col cols="12" md="6">
-            <v-text-field
-              v-model="myInfo.user.number"
-              label="账号"
-              disabled
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" md="6">
-            <v-text-field
-              v-model="myInfo.user.role"
-              label="角色"
-              disabled
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12" md="6">
-            <v-text-field
-              v-model="myInfo.user.name"
-              :rules="nameRules"
-              :counter="16"
-              label="姓名"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12" md="6">
-            <v-btn
-              class="ma-2"
-              outlined
-              @click="updateMyInfo()"
-              :disabled="!valid"
-            >
-              <v-icon left dark>replay</v-icon>
-              更新
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-form>
+  <div>
+    <!-- 用户个人信息显示  -->
+    <v-card>
+      <v-card-title>
+        <v-icon large left>mdi-twitter</v-icon>
+        <span class="title font-weight-light">个人信息</span>
+      </v-card-title>
+      <v-card-text class="headline font-weight-bold">
+        <v-text-field
+          label="学号"
+          hide-details="auto"
+          disabled=""
+          v-model="data.user.userId"
+        ></v-text-field>
+        <v-text-field
+          label="角色"
+          hide-details="auto"
+          disabled=""
+          v-model="data.user.type"
+        ></v-text-field>
+        <v-text-field
+          label="姓名"
+          required
+          disabled=""
+          v-model="data.user.name"
+        ></v-text-field>
+      </v-card-text>
+      <v-card-actions>
+        <v-btn depressed small color="primary" @click="updateInfo"
+        >修改密码
+        </v-btn>
+      </v-card-actions>
+    </v-card>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
+import * as types from "../../store/type.js";
 export default {
-  name: "teacherInfo",
-  data() {
-    return {
-      valid: false,
-      nameRules: [
-        v => v.length <= 16 || "Name must be less than 16 characters",
-        v => v != "" || "不能为空"
-      ],
-      myInfo: {
-        user: {
-          name: ""
-        }
-      }
-    };
-  },
-  components: {},
   created() {
-    this.getMyInfo();
+    this.getStudentInfo();
   },
-  mounted() {},
+  data: () => ({
+    msg: null,
+    data: {
+      user: {
+        name: "",
+        password: "",
+        type: "0",
+        userId: ""
+      }
+    }
+    // rules: [value => !!value || "不能为空."]
+  }),
   methods: {
-    //获取个人信息
-    async getMyInfo() {
-      let resp = await axios.get("teacher/myInfo");
-      this.myInfo = resp.data.data.myInfo;
-    },
-    //更新个人信息
-    async updateMyInfo() {
-      let resp = await axios.patch("teacher/myInfo", this.myInfo.user);
-      this.myInfo = resp.data.data.myInfo;
+    // 获取用户信息
+    async getStudentInfo() {
+      let userId = sessionStorage.getItem(types.userId);
+      console.log(userId);
+      let resp = await axios.get("/user/view/id/" + userId);
+      if (resp != null) {
+        console.log(resp);
+        this.data.user = resp.data.data;
+        if (resp.data.data.type === 1) {
+          this.data.user.type = "老师";
+        }
+      } else {
+        console.log("响应为空");
+      }
     }
   }
 };
 </script>
-<style scoped></style>
