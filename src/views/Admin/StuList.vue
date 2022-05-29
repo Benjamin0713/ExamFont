@@ -165,7 +165,7 @@ export default {
       if (confirmResult !== "confirm") {
         return this.$message.info("已取消修改");
       }
-      const data = await axios.get("/user/modify_type/" + row.userId);
+      const data = await axios.post("/user/modify_type/" + row.userId);
       if (data.status !== 200) {
         return this.$message.error("修改用户失败！");
       }

@@ -91,7 +91,7 @@ export default {
           authName: "题库管理",
           children: [
             {
-              authName: "添加题目",
+              authName: "题目列表",
               path: "questionBank"
             }
           ]
