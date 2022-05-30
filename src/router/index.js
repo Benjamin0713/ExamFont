@@ -9,6 +9,7 @@ import StuList from "../views/Admin/StuList.vue";
 import TeachList from "../views/Admin/TeachList.vue";
 import QuestionBank from "../views/Admin/QuestionBank";
 import { rules } from "eslint-plugin-prettier";
+import AdminInfo from "../views/Admin/AdminInfo";
 
 Vue.use(VueRouter);
 
@@ -82,7 +83,8 @@ let adminRouters = [
       { path: "/welcome", component: Welcome },
       { path: "/stuList", component: StuList },
       { path: "/teachList", component: TeachList },
-      { path: "/questionBank", component: QuestionBank }
+      { path: "/questionBank", component: QuestionBank },
+      { path: "/adminInfo", component: AdminInfo }
     ]
   }
 ];

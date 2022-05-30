@@ -95,6 +95,17 @@ export default {
               path: "questionBank"
             }
           ]
+        },
+        {
+          id: 3,
+          icon: "el-icon-s-custom",
+          authName: "个人信息管理",
+          children: [
+            {
+              authName: "个人信息",
+              path: "adminInfo"
+            }
+          ]
         }
       ],
       // 是否折叠

@@ -24,7 +24,10 @@
           label="题目标题"
           prop="questionTitle"
         ></el-table-column>
-        <el-table-column label="题型(0单选/1多选/2判断/3主观)" prop="questionType"></el-table-column>
+        <el-table-column
+          label="题型(0单选/1多选/2判断/3主观)"
+          prop="questionType"
+        ></el-table-column>
         <!--        <el-table-column label="操作">-->
         <!--          <template slot-scope="scope">-->
         <!--            &lt;!&ndash; 删除按钮 &ndash;&gt;-->
@@ -70,6 +73,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

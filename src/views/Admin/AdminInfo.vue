@@ -8,7 +8,7 @@
       </v-card-title>
       <v-card-text class="headline font-weight-bold">
         <v-text-field
-          label="学号"
+          label="职工号"
           hide-details="auto"
           disabled=""
           v-model="data.user.userId"
@@ -27,9 +27,10 @@
         ></v-text-field>
       </v-card-text>
       <v-card-actions>
-        <v-btn depressed small color="primary" @click="addDialogVisible = true"
+        <el-button type="primary" size="small" @click="addDialogVisible = true"
         >修改密码
-        </v-btn>
+        </el-button
+        >
       </v-card-actions>
     </v-card>
     <el-dialog
@@ -61,9 +62,11 @@
 import axios from "axios";
 import * as types from "../../store/type.js";
 import qs from "qs";
+
 export default {
+  name: "AdminInfo",
   created() {
-    this.getStudentInfo();
+    this.getAdminInfo();
   },
   data: () => ({
     msg: null,
@@ -82,19 +85,18 @@ export default {
         userId: ""
       }
     }
-    // rules: [value => !!value || "不能为空."]
   }),
   methods: {
     // 获取用户信息
-    async getStudentInfo() {
+    async getAdminInfo() {
       let userId = sessionStorage.getItem(types.userId);
       console.log(userId);
       let resp = await axios.get("/user/view/id/" + userId);
       if (resp != null) {
         console.log(resp);
         this.data.user = resp.data.data;
-        if (resp.data.data.type === 0) {
-          this.data.user.type = "学生";
+        if (resp.data.data.type === 2) {
+          this.data.user.type = "管理员";
         }
       } else {
         console.log("响应为空");
@@ -127,3 +129,5 @@ export default {
   }
 };
 </script>
+
+<style lang="less" scoped></style>
