@@ -3,8 +3,8 @@
     <!-- 头部区域 -->
     <el-header>
       <div>
-        <img src="../../assets/exam.png" alt />
-        <img src="../../assets/title.png" alt />
+<!--        <img src="../../assets/exam.png" alt />-->
+<!--        <img src="../../assets/title.png" alt />-->
       </div>
       <el-button type="info" @click="logout">退出</el-button>
     </el-header>

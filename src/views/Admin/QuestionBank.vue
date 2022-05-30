@@ -19,27 +19,42 @@
 
       <!-- 用户列表区域 -->
       <el-table :data="queList" border stripe>
-        <el-table-column type="index"></el-table-column>
         <el-table-column
-          label="题目标题"
-          prop="questionTitle"
+            label="编号"
+            type="index"
+            style="width: 150px"
         ></el-table-column>
         <el-table-column
-          label="题型(0单选/1多选/2判断/3主观)"
-          prop="questionType"
+            label="题目标题"
+            prop="questionTitle"
+            style="width: 250px"
+
         ></el-table-column>
-        <!--        <el-table-column label="操作">-->
-        <!--          <template slot-scope="scope">-->
-        <!--            &lt;!&ndash; 删除按钮 &ndash;&gt;-->
-        <!--            <el-button-->
-        <!--              type="danger"-->
-        <!--              size="medium"-->
-        <!--              @click="removeUserById(scope.row)"-->
-        <!--            >删除-->
-        <!--            </el-button>-->
-        <!--            <el-button type="primary" size="medium" @click="MakeTea(scope.row)">管理</el-button>-->
-        <!--          </template>-->
-        <!--        </el-table-column>-->
+        <el-table-column
+            label="题型"
+            prop="questionType"
+            :formatter="typeFormat"
+        ></el-table-column>
+        <!--        <el-table-column-->
+        <!--            label="选项"-->
+        <!--            prop="options"-->
+        <!--        ></el-table-column>-->
+        <!--        <el-table-column-->
+        <!--            label="正确答案"-->
+        <!--            prop="trueAnswer"-->
+        <!--        ></el-table-column>-->
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <!-- 删除按钮 -->
+            <el-button
+                type="danger"
+                size="medium"
+                @click="remove(scope)"
+            >删除
+            </el-button>
+            <el-button type="primary" size="medium" @click="check(scope)">详情</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </el-card>
   </div>
@@ -51,7 +66,7 @@ import qs from "qs";
 
 export default {
   name: "QuestionBank",
-  data: function() {
+  data: function () {
     return {
       queList: [],
       addDialogVisible: false
@@ -61,6 +76,28 @@ export default {
     this.getQueList();
   },
   methods: {
+    typeFormat(row, column) {
+      if (row.questionType === 0) {
+        return "单选题";
+      } else if (row.questionType === 1) {
+        return "多选题";
+      } else if (row.questionType === 2) {
+        return "判断题";
+      } else if (row.questionType === 3) {
+        return "主观题";
+      }
+    },
+    remove(param) {
+      // remove
+      console.log(1);
+    },
+    check(param) {
+      // dialog
+      // 获取index
+      const index = param.$index;
+      console.log(this.queList[index]);
+      console.log(param.$index);
+    },
     async getQueList() {
       const _this = this;
       const data = await axios.get("/questionbank/get_all");
@@ -73,4 +110,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
