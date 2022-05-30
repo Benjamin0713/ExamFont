@@ -44,8 +44,7 @@
           <template slot-scope="scope">
             <el-button type="primary" size="large" @click="check(scope)"
             >题目详情
-            </el-button
-            >
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -90,7 +89,13 @@ export default {
         name: "questionDetail",
         path: "/questionDetail",
         params: {
-          questionTitle: this.queList[index].questionTitle
+          // options: this.queList[index].options,
+          // questionField: this.queList[index].questionField,
+          // questionId: this.queList[index].questionId,
+          // questionTitle: this.queList[index].questionTitle,
+          // questionType: this.queList[index].questionType,
+          // trueAnswer: this.queList[index].trueAnswer
+          queList: this.queList[index]
         }
       });
     },
