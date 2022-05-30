@@ -10,6 +10,8 @@ import TeachList from "../views/Admin/TeachList.vue";
 import QuestionBank from "../views/Admin/QuestionBank";
 import { rules } from "eslint-plugin-prettier";
 import AdminInfo from "../views/Admin/AdminInfo";
+import CourseInfo from "../views/Teacher/CourseInfo";
+import QuestionDetail from "../views/Admin/QuestionDetail";
 
 Vue.use(VueRouter);
 
@@ -43,6 +45,11 @@ let teacherRouters = [
         path: "myInfo",
         name: "myInfo",
         component: () => import("../views/Teacher/TeacherInfo.vue")
+      },
+      {
+        path: "courseInfo",
+        name: "courseInfo",
+        component: () => import("../views/Teacher/CourseInfo.vue")
       }
     ]
   }
@@ -84,7 +91,12 @@ let adminRouters = [
       { path: "/stuList", component: StuList },
       { path: "/teachList", component: TeachList },
       { path: "/questionBank", component: QuestionBank },
-      { path: "/adminInfo", component: AdminInfo }
+      { path: "/adminInfo", component: AdminInfo },
+      {
+        name: "questionDetail",
+        path: "/questionDetail",
+        component: QuestionDetail
+      }
     ]
   }
 ];

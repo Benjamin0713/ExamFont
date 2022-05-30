@@ -14,14 +14,19 @@
         <el-col :span="4">
           <el-button type="primary" @click="addDialogVisible = true"
           >添加学生
-          </el-button
-          >
+          </el-button>
         </el-col>
       </el-row>
 
       <!-- 用户列表区域 -->
-      <el-table :data="userlist" border stripe>
-        <el-table-column type="index"></el-table-column>
+      <el-table
+        :data="userlist"
+        :cell-style="{ 'text-align': 'center' }"
+        :header-cell-style="{ 'text-align': 'center' }"
+        border
+        stripe
+      >
+        <el-table-column label="编号" type="index"></el-table-column>
         <!--        <el-table-column prop="id" label="序号" sortable width="75px"></el-table-column>-->
         <el-table-column label="姓名" prop="name"></el-table-column>
         <el-table-column label="学号" prop="userId"></el-table-column>
@@ -34,7 +39,10 @@
               @click="removeUserById(scope.row)"
             >删除
             </el-button>
-            <el-button type="primary" size="medium" @click="MakeTea(scope.row)">管理</el-button>
+            <el-button type="primary" size="medium" @click="MakeTea(scope.row)"
+            >管理
+            </el-button
+            >
           </template>
         </el-table-column>
       </el-table>

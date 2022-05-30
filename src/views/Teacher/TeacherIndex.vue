@@ -32,7 +32,7 @@
         <span class="hidden-sm-and-down">在线考试系统-教师后台</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn class="ma-2" outlined @click="logOutAndClearStorage">LogOut</v-btn>
+      <v-btn class="ma-2" outlined @click="logOutAndClearStorage">退出</v-btn>
       <v-btn icon large>
         <v-avatar size="32px" item>
           <v-img
@@ -56,11 +56,14 @@ import axios from "axios";
 export default {
   data: () => ({
     drawer: null,
-
     myInfo: {},
     navItems: [
-      { icon: "mdi-history", text: "考试管理", path: "/teacher/exam" },
-      { icon: "mdi-contacts", text: "个人信息管理", path: "/teacher/myInfo" }
+      { icon: "el-icon-s-claim", text: "授课管理", path: "/teacher/exam" },
+      {
+        icon: "el-icon-user-solid",
+        text: "个人信息管理",
+        path: "/teacher/myInfo"
+      }
     ]
   }),
   components: {},

@@ -66,7 +66,10 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="black darken-1" text @click="register">注册</v-btn>
+                <v-btn color="black darken-1" text @click="register"
+                >注册
+                </v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-col>
@@ -84,9 +87,7 @@ export default {
   name: "Login",
   data() {
     return {
-      notNullRules: [
-        v => v !== "" || "不能为空"
-      ],
+      notNullRules: [v => v !== "" || "不能为空"],
       user: {
         userId: "",
         name: "",
@@ -114,10 +115,7 @@ export default {
     },
     //注册
     async userRegister(user) {
-      const resp = await axios.post(
-        "/user/register",
-        user
-      )
+      const resp = await axios.post("/user/register", user);
       console.log(resp);
       if (resp != null) {
         let rspMsg = resp.data.rspMsg;

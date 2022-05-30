@@ -10,8 +10,14 @@
     <!-- 卡片视图区域 -->
     <el-card>
       <!-- 用户列表区域 -->
-      <el-table :data="userlist" border stripe>
-        <el-table-column type="index"></el-table-column>
+      <el-table
+        :data="userlist"
+        :header-cell-style="{ 'text-align': 'center' }"
+        :cell-style="{ 'text-align': 'center' }"
+        border
+        stripe
+      >
+        <el-table-column label="编号" type="index"></el-table-column>
         <el-table-column label="姓名" prop="name"></el-table-column>
         <el-table-column label="教工号" prop="userId"></el-table-column>
         <el-table-column label="操作">
@@ -89,10 +95,9 @@ export default {
       this.$message.success("删除用户成功！");
       // this.userlist = data.data.data.studentList;
       await this.getUserList();
-    },
+    }
   }
 };
 </script>
 
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

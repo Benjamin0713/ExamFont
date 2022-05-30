@@ -3,7 +3,7 @@
     <!-- 用户个人信息显示  -->
     <v-card>
       <v-card-title>
-        <v-icon large left>mdi-twitter</v-icon>
+        <v-icon large left>el-icon-postcard</v-icon>
         <span class="title font-weight-light">个人信息</span>
       </v-card-title>
       <v-card-text class="headline font-weight-bold">
