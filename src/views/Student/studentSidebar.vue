@@ -8,11 +8,11 @@
         </v-list-item-icon>
         <v-list-item-title>个人信息</v-list-item-title>
       </v-list-item>
-      <v-list-item to="/examList">
+      <v-list-item to="/courseList">
         <v-list-item-icon>
           <v-icon>pets</v-icon>
         </v-list-item-icon>
-        <v-list-item-title>考试列表</v-list-item-title>
+        <v-list-item-title>课程列表</v-list-item-title>
       </v-list-item>
       <v-list-item to="/gradeList">
         <v-list-item-icon>

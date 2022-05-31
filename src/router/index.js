@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Login from "../views/Login.vue";
+import Login from "../views/Login.vue"
 import Register from "../views/Register.vue";
 import * as tpyes from "../store/type";
 import Home from "../views/Admin/Home.vue";
@@ -57,6 +57,11 @@ let studentRouters = [
         props: true,
         path: "/examList",
         component: () => import("../views/Student/examList.vue")
+      },
+      {
+        props: true,
+        path: "/courseList",
+        component: () => import("../views/Student/courseList.vue")
       },
       {
         props: true,
