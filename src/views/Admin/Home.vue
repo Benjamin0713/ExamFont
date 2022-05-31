@@ -2,9 +2,10 @@
   <el-container class="home-container">
     <!-- 头部区域 -->
     <el-header>
-      <div>
-<!--        <img src="../../assets/exam.png" alt />-->
-<!--        <img src="../../assets/title.png" alt />-->
+      <div style="color:white">
+        <!--        <img src="../../assets/exam.png" alt />-->
+        <!--        <img src="../../assets/title.png" alt />-->
+        在线考试系统-管理员后台
       </div>
       <el-button type="info" @click="logout">退出</el-button>
     </el-header>

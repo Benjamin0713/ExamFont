@@ -18,41 +18,33 @@
       </el-row>
 
       <!-- 用户列表区域 -->
-      <el-table :data="queList" border stripe>
+      <el-table
+        :data="queList"
+        :cell-style="{ 'text-align': 'center' }"
+        :header-cell-style="{ 'text-align': 'center' }"
+        border
+        stripe
+      >
         <el-table-column
-            label="编号"
-            type="index"
-            style="width: 150px"
+          label="编号"
+          type="index"
+          style="width: 150px"
         ></el-table-column>
         <el-table-column
-            label="题目标题"
-            prop="questionTitle"
-            style="width: 250px"
-
+          label="题目标题"
+          prop="questionTitle"
+          style="width: 250px"
         ></el-table-column>
         <el-table-column
-            label="题型"
-            prop="questionType"
-            :formatter="typeFormat"
+          label="题型"
+          prop="questionType"
+          :formatter="typeFormat"
         ></el-table-column>
-        <!--        <el-table-column-->
-        <!--            label="选项"-->
-        <!--            prop="options"-->
-        <!--        ></el-table-column>-->
-        <!--        <el-table-column-->
-        <!--            label="正确答案"-->
-        <!--            prop="trueAnswer"-->
-        <!--        ></el-table-column>-->
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <!-- 删除按钮 -->
-            <el-button
-                type="danger"
-                size="medium"
-                @click="remove(scope)"
-            >删除
+            <el-button type="primary" size="large" @click="check(scope)"
+            >题目详情
             </el-button>
-            <el-button type="primary" size="medium" @click="check(scope)">详情</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -66,7 +58,7 @@ import qs from "qs";
 
 export default {
   name: "QuestionBank",
-  data: function () {
+  data: function() {
     return {
       queList: [],
       addDialogVisible: false
@@ -87,16 +79,25 @@ export default {
         return "主观题";
       }
     },
-    remove(param) {
-      // remove
-      console.log(1);
-    },
     check(param) {
       // dialog
       // 获取index
       const index = param.$index;
       console.log(this.queList[index]);
-      console.log(param.$index);
+      // console.log(param.$index);
+      this.$router.push({
+        name: "questionDetail",
+        path: "/questionDetail",
+        params: {
+          // options: this.queList[index].options,
+          // questionField: this.queList[index].questionField,
+          // questionId: this.queList[index].questionId,
+          // questionTitle: this.queList[index].questionTitle,
+          // questionType: this.queList[index].questionType,
+          // trueAnswer: this.queList[index].trueAnswer
+          queList: this.queList[index]
+        }
+      });
     },
     async getQueList() {
       const _this = this;
@@ -110,6 +111,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

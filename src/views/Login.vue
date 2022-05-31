@@ -57,7 +57,10 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="black darken-1" text @click="register">注册</v-btn>
+                <v-btn color="black darken-1" text @click="register"
+                >注册
+                </v-btn
+                >
                 <v-btn color="black darken-1" text @click="login">登入</v-btn>
               </v-card-actions>
             </v-card>
@@ -121,7 +124,7 @@ export default {
           id: user.id,
           password: user.password
         })
-      )
+      );
       console.log(resp);
       if (resp != null) {
         //  置于本地session仓库
