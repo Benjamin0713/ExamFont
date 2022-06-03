@@ -8,15 +8,14 @@
           <v-subheader>课程列表</v-subheader>
           <el-table :data="courseList" border stripe>
             <el-table-column type="index"></el-table-column>
-<!--            <el-table-column prop="id" label="序号" sortable width="75px"></el-table-column>-->
             <el-table-column label="课程名" prop="courseName"></el-table-column>
             <el-table-column label="教师" prop="teacher.name"></el-table-column>
             <el-table-column label="操作">
-              <template>
+              <template slot-scope="scope" >
                 <el-button
                   type="danger"
                   size="medium"
-                  @click="addDialogVisible = true"
+                  @click="getExamList(scope.row)"
                 >查看考试
                 </el-button>
               </template>
@@ -30,42 +29,47 @@
       title="考试列表"
       :visible.sync="addDialogVisible"
       width="80%"
-      @close="addDialogClosed"
       class="dialog"
     >
       <!-- 内容主体区域 -->
       <v-list shaped>
-        <v-subheader>课程列表</v-subheader>
-        <el-table :data="courseList" border stripe>
+        <v-subheader>考试列表</v-subheader>
+        <el-table :data="examList" border stripe>
           <el-table-column type="index"></el-table-column>
-          <!--            <el-table-column prop="id" label="序号" sortable width="75px"></el-table-column>-->
-          <el-table-column label="课程名" prop="courseName"></el-table-column>
-          <el-table-column label="教师" prop="teacher.name"></el-table-column>
+          <el-table-column label="考试名称" prop="paperTitle"></el-table-column>
+<!--          <el-table-column label="开始时间" prop="startDate｜formatdate"></el-table-column>-->
+          <el-table-column label="开始时间">
+            <template slot-scope="scope">{{scope.row.startDate|format_date}}</template>
+          </el-table-column>
+          <el-table-column label="结束时间">
+            <template slot-scope="scope">{{scope.row.endDate|format_date}}</template>
+          </el-table-column>
+          <el-table-column label="考试状态">
+            <template slot-scope="scope">{{scope.row.status|determine}}</template>
+          </el-table-column>
           <el-table-column label="操作">
             <template>
               <el-button
+
                 type="danger"
                 size="medium"
-                @click="addDialogVisible = true"
+                @click="addDialogVisible = true" :style="{ display: showRead }"
               >查看考试
+              </el-button>
+              <el-button
+                type="danger"
+                size="medium"
+                @click="addDialogVisible = true" :style="{ display: showStart }"
+              >开始考试
               </el-button>
             </template>
           </el-table-column>
         </el-table>
 
       </v-list>
-<!--      <el-form ref="addFormRef" label-width="70px">-->
-<!--        <el-form-item label="旧密码" prop="oldpwd">-->
-<!--          <el-input v-model="add.user.oldpwd"></el-input>-->
-<!--        </el-form-item>-->
-<!--        <el-form-item label="新密码" prop="newpwd">-->
-<!--          <el-input v-model="add.user.newpwd"></el-input>-->
-<!--        </el-form-item>-->
-<!--      </el-form>-->
-      <!-- 底部区域 -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="updateInfo">确 定</el-button>
+<!--        <el-button type="primary" @click="updateInfo">确 定</el-button>-->
       </span>
     </el-dialog>
   </div>
@@ -82,7 +86,10 @@ export default {
     alert: false,
     dialog: false,
     courseList: [],
-    addDialogVisible: false
+    examList: [],
+    addDialogVisible: false,
+    showRead: '',
+    showStart: ''
 
   }),
   methods: {
@@ -96,11 +103,44 @@ export default {
       if (resp.status !== 200) {
         return this.$message.error("获取课程列表失败");
       }
-      console.log(resp.data);
+      // console.log(resp.data);
       _this.courseList=resp.data.data;
     },
-    addDialogClosed() {
-      this.$refs.addFormRef.resetFields();
+    // 获取考试列表
+    async getExamList(row) {
+      this.addDialogVisible = true
+      const _this = this;
+      // console.log(row.courseId);
+      let resp = await axios.get("/paper/student_get_papers/"+row.courseId);
+      if (resp.status !== 200) {
+        return this.$message.error("获取考试列表失败");
+      }
+      // console.log(row);
+      _this.examList=resp.data.data;
+      // if(row.status ==2){
+      //   _this.showstart='none'
+      // }else{
+      //   _this.showread='none'
+      // }
+      // console.log(_this.examList);
+    },
+    // addDialogClosed() {
+    //   this.$refs.addFormRef.resetFields();
+    // }
+
+  },
+  filters:{
+    format_date(date){
+      var json_date = new Date(date).toJSON();
+      return new Date(new Date(json_date) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+    },
+    determine(status){
+      const _this = this;
+      if (status === 2){
+        return "已结束"
+      }else{
+        return "未开始"
+      }
     }
 
   }

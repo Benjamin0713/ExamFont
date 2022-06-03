@@ -58,7 +58,7 @@ export default {
     drawer: null,
     myInfo: {},
     navItems: [
-      { icon: "el-icon-s-claim", text: "授课管理", path: "/teacher/exam" },
+      { icon: "el-icon-s-claim", text: "课程管理", path: "courseInfo" },
       {
         icon: "el-icon-user-solid",
         text: "个人信息管理",
