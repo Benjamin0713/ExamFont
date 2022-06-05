@@ -3,8 +3,6 @@
     <!-- 头部区域 -->
     <el-header>
       <div style="color:white">
-        <!--        <img src="../../assets/exam.png" alt />-->
-        <!--        <img src="../../assets/title.png" alt />-->
         在线考试系统-管理员后台
       </div>
       <el-button type="info" @click="logout">退出</el-button>

@@ -18,16 +18,12 @@
       ></el-input>
     </el-form-item>
     <el-form-item label="题目类型" prop="questionType">
-      <el-input
-        v-model="question.questionType"
-        style="width: 500px"
-      ></el-input>
+      <el-input v-model="question.questionType" style="width: 500px"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm('ruleForm')"
       >修改数据
-      </el-button
-      >
+      </el-button>
       <el-button @click="resetForm('ruleForm')">重置</el-button>
     </el-form-item>
   </el-form>

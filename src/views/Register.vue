@@ -56,8 +56,7 @@
                 <v-spacer></v-spacer>
                 <v-btn color="black darken-1" text @click="register"
                 >注册
-                </v-btn
-                >
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-col>

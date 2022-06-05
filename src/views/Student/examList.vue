@@ -48,8 +48,7 @@
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn color="red lighten-2" dark v-bind="attrs" v-on="on"
                   >进入考试
-                  </v-btn
-                  >
+                  </v-btn>
                 </template>
 
                 <v-card>

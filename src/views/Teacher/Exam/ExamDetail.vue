@@ -1,8 +1,8 @@
 <template>
   <div class="detail">
-<!--    <v-row>-->
-<!--      <v-breadcrumbs :items="breadItems" large></v-breadcrumbs>-->
-<!--    </v-row>-->
+    <!--    <v-row>-->
+    <!--      <v-breadcrumbs :items="breadItems" large></v-breadcrumbs>-->
+    <!--    </v-row>-->
     <v-row align="center" class="mx-auto" justify="center">
       <v-toolbar-title
         ><h3>{{ examDetail.name }}</h3>
@@ -28,26 +28,23 @@
                 <th class="text-left">学号</th>
                 <th class="text-left">学生名</th>
                 <th class="text-left">提交情况</th>
-<!--                <th class="text-left">客观题</th>-->
-<!--                <th class="text-left">主观题</th>-->
+                <!--                <th class="text-left">客观题</th>-->
+                <!--                <th class="text-left">主观题</th>-->
                 <th class="text-left">答题卡</th>
               </tr>
             </thead>
             <tbody>
-              <tr
-                v-for="(item, index) in examDetail"
-                :key="item.answerSheetId"
-              >
-                <td>{{ index + 1 }}</td>
-                <td>{{ item.student.userId }}</td>
-                <td>{{ item.student.name }}</td>
-                <td>{{ item.status ? "已提交" : "未提交" }}</td>
-                <td>
-                  <v-btn
-                    class="ma-2"
-                    outlined
-                    v-if="item.status"
-                    @click="openStuentSheet(item.student.user.id)"
+            <tr v-for="(item, index) in examDetail" :key="item.answerSheetId">
+              <td>{{ index + 1 }}</td>
+              <td>{{ item.student.userId }}</td>
+              <td>{{ item.student.name }}</td>
+              <td>{{ item.status ? "已提交" : "未提交" }}</td>
+              <td>
+                <v-btn
+                  class="ma-2"
+                  outlined
+                  v-if="item.status"
+                  @click="openStuentSheet(item.student.user.id)"
                   >
                     查看答题卡
                     <v-icon right dark>keyboard_arrow_right</v-icon>
@@ -72,7 +69,9 @@
           <h3>一、选择题</h3>
           <template v-for="(item, index) in question.questionTitle">
             <div :key="item.questionList">
-              <h5>{{ index + 1 }}.{{ item.questionTitle }} ({{ item.score }}分)</h5>
+              <h5>
+                {{ index + 1 }}.{{ item.questionTitle }} ({{ item.score }}分)
+              </h5>
               <br />
               <v-list-item-subtitle>
                 A.{{ item.options }}
@@ -236,7 +235,7 @@ export default {
       examDetail: [],
       // 学生主观题答题卡
       subjectiveList: [],
-      question:[],
+      question: [],
       breadItems: [
         {
           text: "exam",
@@ -316,20 +315,22 @@ export default {
     },
     // 获取考试详细
     async getExamDetail() {
-      console.log(this.eid)
-      let resp = await axios.get(`/answersheet/teacher_get_basic_info/${this.eid}`);
+      console.log(this.eid);
+      let resp = await axios.get(
+        `/answersheet/teacher_get_basic_info/${this.eid}`
+      );
       this.examDetail = resp.data.data;
-      console.log("222222")
-      console.log(this.examDetail)
-      console.log("22222")
+      console.log("222222");
+      console.log(this.examDetail);
+      console.log("22222");
     },
     async getQuestion() {
-      console.log(this.eid)
+      console.log(this.eid);
       let resp = await axios.get(`/paper/view/${this.eid}`);
       this.question = resp.data.data;
-      console.log("33333")
-      console.log(this.question)
-      console.log("33333")
+      console.log("33333");
+      console.log(this.question);
+      console.log("33333");
     },
     // 导入试题
     async addPaperToExam() {

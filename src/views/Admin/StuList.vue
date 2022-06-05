@@ -41,8 +41,7 @@
             </el-button>
             <el-button type="primary" size="medium" @click="MakeTea(scope.row)"
             >管理
-            </el-button
-            >
+            </el-button>
           </template>
         </el-table-column>
       </el-table>

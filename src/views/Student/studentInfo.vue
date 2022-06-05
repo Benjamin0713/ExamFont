@@ -29,8 +29,7 @@
       <v-card-actions>
         <v-btn depressed small color="primary" @click="updateInfo"
         >修改密码
-        </v-btn
-        >
+        </v-btn>
       </v-card-actions>
     </v-card>
   </div>

@@ -11,7 +11,7 @@
             <el-table-column label="课程名" prop="courseName"></el-table-column>
             <el-table-column label="教师" prop="teacher.name"></el-table-column>
             <el-table-column label="操作">
-              <template slot-scope="scope" >
+              <template slot-scope="scope">
                 <el-button
                   type="danger"
                   size="medium"
@@ -21,7 +21,6 @@
               </template>
             </el-table-column>
           </el-table>
-
         </v-list>
       </v-card>
     </div>
@@ -37,39 +36,48 @@
         <el-table :data="examList" border stripe>
           <el-table-column type="index"></el-table-column>
           <el-table-column label="考试名称" prop="paperTitle"></el-table-column>
-<!--          <el-table-column label="开始时间" prop="startDate｜formatdate"></el-table-column>-->
+          <!--          <el-table-column label="开始时间" prop="startDate｜formatdate"></el-table-column>-->
           <el-table-column label="开始时间">
-            <template slot-scope="scope">{{scope.row.startDate|format_date}}</template>
+            <template slot-scope="scope">{{
+                scope.row.startDate | format_date
+              }}
+            </template>
           </el-table-column>
           <el-table-column label="结束时间">
-            <template slot-scope="scope">{{scope.row.endDate|format_date}}</template>
+            <template slot-scope="scope">{{
+                scope.row.endDate | format_date
+              }}
+            </template>
           </el-table-column>
           <el-table-column label="考试状态">
-            <template slot-scope="scope">{{scope.row.status|determine}}</template>
+            <template slot-scope="scope">{{
+                scope.row.status | determine
+              }}
+            </template>
           </el-table-column>
           <el-table-column label="操作">
             <template>
               <el-button
-
                 type="danger"
                 size="medium"
-                @click="addDialogVisible = true" :style="{ display: showRead }"
+                @click="addDialogVisible = true"
+                :style="{ display: showRead }"
               >查看考试
               </el-button>
               <el-button
                 type="danger"
                 size="medium"
-                @click="addDialogVisible = true" :style="{ display: showStart }"
+                @click="addDialogVisible = true"
+                :style="{ display: showStart }"
               >开始考试
               </el-button>
             </template>
           </el-table-column>
         </el-table>
-
       </v-list>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialogVisible = false">取 消</el-button>
-<!--        <el-button type="primary" @click="updateInfo">确 定</el-button>-->
+        <!--        <el-button type="primary" @click="updateInfo">确 定</el-button>-->
       </span>
     </el-dialog>
   </div>
@@ -88,9 +96,8 @@ export default {
     courseList: [],
     examList: [],
     addDialogVisible: false,
-    showRead: '',
-    showStart: ''
-
+    showRead: "",
+    showStart: ""
   }),
   methods: {
     formatDate(date) {
@@ -104,45 +111,46 @@ export default {
         return this.$message.error("获取课程列表失败");
       }
       // console.log(resp.data);
-      _this.courseList=resp.data.data;
+      _this.courseList = resp.data.data;
     },
     // 获取考试列表
     async getExamList(row) {
-      this.addDialogVisible = true
+      this.addDialogVisible = true;
       const _this = this;
       // console.log(row.courseId);
-      let resp = await axios.get("/paper/student_get_papers/"+row.courseId);
+      let resp = await axios.get("/paper/student_get_papers/" + row.courseId);
       if (resp.status !== 200) {
         return this.$message.error("获取考试列表失败");
       }
       // console.log(row);
-      _this.examList=resp.data.data;
+      _this.examList = resp.data.data;
       // if(row.status ==2){
       //   _this.showstart='none'
       // }else{
       //   _this.showread='none'
       // }
       // console.log(_this.examList);
-    },
+    }
     // addDialogClosed() {
     //   this.$refs.addFormRef.resetFields();
     // }
-
   },
-  filters:{
-    format_date(date){
+  filters: {
+    format_date(date) {
       var json_date = new Date(date).toJSON();
-      return new Date(new Date(json_date) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+      return new Date(new Date(json_date) + 8 * 3600 * 1000)
+        .toISOString()
+        .replace(/T/g, " ")
+        .replace(/\.[\d]{3}Z/, "");
     },
-    determine(status){
+    determine(status) {
       const _this = this;
-      if (status === 2){
-        return "已结束"
-      }else{
-        return "未开始"
+      if (status === 2) {
+        return "已结束";
+      } else {
+        return "未开始";
       }
     }
-
   }
 };
 </script>

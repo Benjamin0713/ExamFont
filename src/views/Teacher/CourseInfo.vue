@@ -20,7 +20,6 @@
               </template>
             </el-table-column>
           </el-table>
-
         </v-list>
       </v-card>
     </div>
@@ -38,16 +37,28 @@
           <el-table-column type="index"></el-table-column>
           <el-table-column label="考试名称" prop="paperTitle"></el-table-column>
           <el-table-column label="创建时间">
-            <template slot-scope="scope">{{scope.row.createDate|format_date}}</template>
+            <template slot-scope="scope">{{
+                scope.row.createDate | format_date
+              }}
+            </template>
           </el-table-column>
-          <el-table-column label="开始时间" >
-            <template slot-scope="scope">{{scope.row.startDate|format_date}}</template>
+          <el-table-column label="开始时间">
+            <template slot-scope="scope">{{
+                scope.row.startDate | format_date
+              }}
+            </template>
           </el-table-column>
-          <el-table-column label="结束时间" >
-            <template slot-scope="scope">{{scope.row.endDate|format_date}}</template>
+          <el-table-column label="结束时间">
+            <template slot-scope="scope">{{
+                scope.row.endDate | format_date
+              }}
+            </template>
           </el-table-column>
-          <el-table-column label="考试状态" >
-            <template slot-scope="scope">{{scope.row.status|determine}}</template>
+          <el-table-column label="考试状态">
+            <template slot-scope="scope">{{
+                scope.row.status | determine
+              }}
+            </template>
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
@@ -66,7 +77,6 @@
             </template>
           </el-table-column>
         </el-table>
-
       </v-list>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialogVisible = false">取 消</el-button>
@@ -88,7 +98,6 @@ export default {
     courseList: [],
     examList: [],
     addDialogVisible: false
-
   }),
   methods: {
     formatDate(date) {
@@ -102,42 +111,42 @@ export default {
         return this.$message.error("获取课程列表失败");
       }
       console.log(resp.data);
-      _this.courseList=resp.data.data;
+      _this.courseList = resp.data.data;
     },
     // 获取考试列表
     async getExamList(row) {
-      this.addDialogVisible = true
+      this.addDialogVisible = true;
       const _this = this;
-      let resp = await axios.get("/paper/teacher_get_papers/"+row.courseId);
+      let resp = await axios.get("/paper/teacher_get_papers/" + row.courseId);
       if (resp.status !== 200) {
         return this.$message.error("获取考试列表失败");
       }
       console.log(resp.data);
-      _this.examList=resp.data.data;
+      _this.examList = resp.data.data;
       console.log(_this.examList);
-
     },
     addDialogClosed() {
       this.$refs.addFormRef.resetFields();
     },
     detail(eid) {
       this.$router.push(`/teacher/exam/${eid}`);
-    },
-
+    }
   },
-  filters:{
-    format_date(date){
+  filters: {
+    format_date(date) {
       var json_date = new Date(date).toJSON();
-      return new Date(new Date(json_date) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+      return new Date(new Date(json_date) + 8 * 3600 * 1000)
+        .toISOString()
+        .replace(/T/g, " ")
+        .replace(/\.[\d]{3}Z/, "");
     },
-    determine(status){
-      if (status === 2){
-        return "已结束"
-      }else{
-        return "未开始"
+    determine(status) {
+      if (status === 2) {
+        return "已结束";
+      } else {
+        return "未开始";
       }
     }
-
   }
 };
 </script>
