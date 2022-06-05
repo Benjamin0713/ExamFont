@@ -1,8 +1,4 @@
 <template>
-  <div class="detail">
-    <!--    <v-row>-->
-    <!--      <v-breadcrumbs :items="breadItems" large></v-breadcrumbs>-->
-    <!--    </v-row>-->
     <v-row align="center" class="mx-auto" justify="center">
       <v-toolbar-title
         ><h3>{{ examDetail.name }}</h3>
@@ -28,8 +24,6 @@
                 <th class="text-left">学号</th>
                 <th class="text-left">学生名</th>
                 <th class="text-left">提交情况</th>
-                <!--                <th class="text-left">客观题</th>-->
-                <!--                <th class="text-left">主观题</th>-->
                 <th class="text-left">答题卡</th>
               </tr>
             </thead>
@@ -256,44 +250,6 @@ export default {
   },
   mounted() {},
   methods: {
-    // 读取学生
-    readStudents(files) {
-      let file = files[0];
-      analysis.readStudentsFile(file).then(data => {
-        this.students = data;
-        this.addStudentsToExam();
-      });
-    },
-    // 读取试卷
-    readPaper(files) {
-      let file = files[0];
-      analysis.readPaperFile(file).then(data => {
-        this.paper = data;
-        console.log(this.paper);
-        this.addPaperToExam();
-      });
-    },
-    // 数字转选项
-    // getOption(number) {
-    //   //  var option = ["A","B","C","D"]
-    //
-    //   if (number == 1) return "A";
-    //   if (number == 2) return "B";
-    //   if (number == 3) return "AB";
-    //   if (number == 4) return "C";
-    //   if (number == 5) return "AC";
-    //   if (number == 6) return "BC";
-    //   if (number == 7) return "ABC";
-    //   if (number == 8) return "D";
-    //   if (number == 9) return "AD";
-    //   if (number == 10) return "BD";
-    //   if (number == 11) return "ABD";
-    //   if (number == 12) return "CD";
-    //   if (number == 13) return "ACD";
-    //   if (number == 14) return "BCD";
-    //   if (number == 15) return "ABCD";
-    //   return;
-    // },
     // 打开统计成绩面板
     openGradeSheet() {
       this.getGradeSheetList().then(() => {
@@ -331,37 +287,6 @@ export default {
       console.log("33333");
       console.log(this.question);
       console.log("33333");
-    },
-    // 导入试题
-    async addPaperToExam() {
-      let resp = await axios.post(`teacher/exam/${this.eid}/paper`, this.paper);
-      this.examDetail = resp.data.data.examDetail;
-    },
-    // 导入学生
-    async addStudentsToExam() {
-      let resp = await axios.post(
-        `teacher/exam/${this.eid}/students`,
-        this.students
-      );
-      this.examDetail = resp.data.data.examDetail;
-    },
-    // 获取学生主观题
-    async getStudentSheet(sid) {
-      let resp = await axios.get(`teacher/exam/${this.eid}/student/${sid}`);
-      this.subjectiveList = resp.data.data.subjectiveList;
-    },
-    // 批卷主观题
-    async updateStudentsSubjective(sid) {
-      let resp = await axios.patch(
-        `teacher/exam/${this.eid}/student/${sid}`,
-        this.subjectiveList
-      );
-      this.examDetail = resp.data.data.examDetail;
-    },
-    // 统计成绩
-    async getGradeSheetList() {
-      let resp = await axios.get(`teacher/exam/${this.eid}/grade`);
-      this.gradeSheetList = resp.data.data.gradeSheetList;
     }
   }
 };

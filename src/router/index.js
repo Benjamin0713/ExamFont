@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Login from "../views/Login.vue"
+import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import * as tpyes from "../store/type";
 import Home from "../views/Admin/Home.vue";
@@ -8,9 +8,7 @@ import Welcome from "../views/Admin/Welcome.vue";
 import StuList from "../views/Admin/StuList.vue";
 import TeachList from "../views/Admin/TeachList.vue";
 import QuestionBank from "../views/Admin/QuestionBank";
-import { rules } from "eslint-plugin-prettier";
 import AdminInfo from "../views/Admin/AdminInfo";
-import CourseInfo from "../views/Teacher/CourseInfo";
 import QuestionDetail from "../views/Admin/QuestionDetail";
 
 Vue.use(VueRouter);
@@ -32,10 +30,6 @@ let teacherRouters = [
     path: "/teacher",
     component: () => import("../views/Teacher/TeacherIndex.vue"),
     children: [
-      {
-        path: "exam",
-        component: () => import("../views/Teacher/Exam/ExamList.vue")
-      },
       {
         path: "exam/:eid",
         props: true,
@@ -60,11 +54,6 @@ let studentRouters = [
     name: "StudentHome",
     component: () => import("../views/Student/StudentIndex.vue"),
     children: [
-      {
-        props: true,
-        path: "/examList",
-        component: () => import("../views/Student/examList.vue")
-      },
       {
         props: true,
         path: "/courseList",
@@ -115,6 +104,7 @@ VueRouter.prototype.push = function push(location) {
 };
 
 export default router;
+
 // 更新路由
 export function updateRouters() {
   let role = sessionStorage.getItem(tpyes.role);
@@ -130,5 +120,6 @@ export function updateRouters() {
       break;
   }
 }
+
 // 刷新页面更新路由
 updateRouters();

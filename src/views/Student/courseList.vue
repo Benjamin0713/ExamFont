@@ -77,7 +77,6 @@
       </v-list>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialogVisible = false">取 消</el-button>
-        <!--        <el-button type="primary" @click="updateInfo">确 定</el-button>-->
       </span>
     </el-dialog>
   </div>
@@ -112,6 +111,7 @@ export default {
       }
       // console.log(resp.data);
       _this.courseList = resp.data.data;
+      console.log(_this.courseList);
     },
     // 获取考试列表
     async getExamList(row) {
@@ -131,9 +131,6 @@ export default {
       // }
       // console.log(_this.examList);
     }
-    // addDialogClosed() {
-    //   this.$refs.addFormRef.resetFields();
-    // }
   },
   filters: {
     format_date(date) {

@@ -8,19 +8,10 @@
       dark
     >
       <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
-        <span class="hidden-sm-and-down">在线考试系统-学生端</span>
+        <span class="hidden-sm-and-down">学生端</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn class="ma-2" outlined @click="logOutAndClearStorage">退出</v-btn>
-      <v-btn icon large>
-        <v-avatar size="32px" item>
-          <v-img
-            src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
-            alt="Vuetify"
-          ></v-img
-        ></v-avatar>
-      </v-btn>
-    </v-app-bar>
     <!-- 主体内容 -->
     <v-main>
       <v-container fluid>
