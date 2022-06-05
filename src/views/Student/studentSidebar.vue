@@ -4,13 +4,13 @@
     <v-list>
       <v-list-item to="/studentInfo">
         <v-list-item-icon>
-          <v-icon>mdi-home</v-icon>
+          <v-icon>subject</v-icon>
         </v-list-item-icon>
         <v-list-item-title>个人信息</v-list-item-title>
       </v-list-item>
       <v-list-item to="/courseList">
         <v-list-item-icon>
-          <v-icon>pets</v-icon>
+          <v-icon>subject</v-icon>
         </v-list-item-icon>
         <v-list-item-title>课程列表</v-list-item-title>
       </v-list-item>
