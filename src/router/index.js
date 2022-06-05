@@ -60,11 +60,6 @@ let studentRouters = [
         component: () => import("../views/Student/courseList.vue")
       },
       {
-        props: true,
-        path: "/examInfo/:eid",
-        component: () => import("../views/Student/examInfo.vue")
-      },
-      {
         path: "/studentInfo",
         component: () => import("../views/Student/studentInfo.vue")
       },
