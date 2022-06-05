@@ -19,26 +19,6 @@
     </v-row>
 
     <v-row>
-<!--      <v-col cols="6">-->
-<!--        <v-file-input-->
-<!--          show-size-->
-<!--          counter-->
-<!--          chips-->
-<!--          multiple-->
-<!--          label="Import students"-->
-<!--          @change="readStudents"-->
-<!--        ></v-file-input>-->
-<!--      </v-col>-->
-<!--      <v-col cols="6">-->
-<!--        <v-file-input-->
-<!--          show-size-->
-<!--          counter-->
-<!--          chips-->
-<!--          multiple-->
-<!--          label="Import paper"-->
-<!--          @change="readPaper"-->
-<!--        ></v-file-input>-->
-<!--      </v-col>-->
       <v-col cols="12" md="12">
         <v-simple-table>
           <template v-slot:default>
@@ -62,8 +42,6 @@
                 <td>{{ item.student.userId }}</td>
                 <td>{{ item.student.name }}</td>
                 <td>{{ item.status ? "已提交" : "未提交" }}</td>
-<!--                <td>{{ item.objectiveGrade }}</td>-->
-<!--                <td>{{ item.subjectiveGrade }}</td>-->
                 <td>
                   <v-btn
                     class="ma-2"
@@ -92,7 +70,7 @@
         </v-card-title>
         <v-container>
           <h3>一、选择题</h3>
-          <template v-for="(item, index) in question">
+          <template v-for="(item, index) in question.questionTitle">
             <div :key="item.questionList">
               <h5>{{ index + 1 }}.{{ item.questionTitle }} ({{ item.score }}分)</h5>
               <br />

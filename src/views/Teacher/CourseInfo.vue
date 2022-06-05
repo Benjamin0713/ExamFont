@@ -7,7 +7,6 @@
           <v-subheader>课程列表</v-subheader>
           <el-table :data="courseList" border stripe>
             <el-table-column type="index"></el-table-column>
-            <!--            <el-table-column prop="id" label="序号" sortable width="75px"></el-table-column>-->
             <el-table-column label="课程名" prop="courseName"></el-table-column>
             <el-table-column label="教师" prop="teacher.name"></el-table-column>
             <el-table-column label="操作">
@@ -69,18 +68,8 @@
         </el-table>
 
       </v-list>
-      <!--      <el-form ref="addFormRef" label-width="70px">-->
-      <!--        <el-form-item label="旧密码" prop="oldpwd">-->
-      <!--          <el-input v-model="add.user.oldpwd"></el-input>-->
-      <!--        </el-form-item>-->
-      <!--        <el-form-item label="新密码" prop="newpwd">-->
-      <!--          <el-input v-model="add.user.newpwd"></el-input>-->
-      <!--        </el-form-item>-->
-      <!--      </el-form>-->
-      <!-- 底部区域 -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialogVisible = false">取 消</el-button>
-<!--        <el-button type="primary" @click="updateInfo">确 定</el-button>-->
       </span>
     </el-dialog>
   </div>
@@ -142,7 +131,6 @@ export default {
       return new Date(new Date(json_date) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
     },
     determine(status){
-      const _this = this;
       if (status === 2){
         return "已结束"
       }else{

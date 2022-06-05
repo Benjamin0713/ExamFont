@@ -10,15 +10,6 @@
           transition="scale-transition"
           width="40"
         />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="../assets/title.png"
-          width="250"
-        />
       </div>
     </v-app-bar>
     <v-main>
@@ -27,33 +18,29 @@
           <v-col cols="12" sm="8" md="5">
             <v-card>
               <v-card-title>
-                <span class="headline">输入您的账户</span>
+                <span class="headline">输入您的账号</span>
                 <v-spacer></v-spacer>
               </v-card-title>
-              <!-- <v-divider></v-divider> -->
               <v-card-text>
                 <v-container>
                   <v-row>
                     <v-col cols="12">
                       <v-text-field
-                        label="*账号"
+                        label="学号"
                         required
-                        :rules="notNullRules"
                         v-model="user.id"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
-                        label="*密码"
+                        label="密码"
                         type="password"
-                        :rules="notNullRules"
                         required
                         v-model="user.password"
                       ></v-text-field>
                     </v-col>
                   </v-row>
                 </v-container>
-                <small>*请确认您使用自己的帐户</small>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -61,7 +48,7 @@
                 >注册
                 </v-btn
                 >
-                <v-btn color="black darken-1" text @click="login">登入</v-btn>
+                <v-btn color="black darken-1" text @click="login">登陆</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -80,10 +67,6 @@ export default {
   name: "Login",
   data() {
     return {
-      notNullRules: [
-        v => /^[0-9]*$/.test(v) || "必须是数字",
-        v => v !== "" || "不能为空"
-      ],
       user: {
         id: "",
         password: ""
@@ -103,7 +86,7 @@ export default {
         let role = sessionStorage.getItem(types.role);
         console.log(role);
         if (role === types.teacherRole) {
-          this.$router.push("/teacher/exam");
+          this.$router.push("/teacher/courseInfo");
         }
         if (role === types.studentRole) {
           this.$router.push("/student");

@@ -10,14 +10,6 @@
           transition="scale-transition"
           width="40"
         />
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="../assets/title.png"
-          width="250"
-        />
       </div>
 
       <v-spacer></v-spacer>
@@ -39,7 +31,6 @@
                       <v-text-field
                         label="学号"
                         required
-                        :rules="notNullRules"
                         v-model="user.userId"
                       ></v-text-field>
                     </v-col>
@@ -47,7 +38,6 @@
                       <v-text-field
                         label="姓名"
                         required
-                        :rules="notNullRules"
                         v-model="user.name"
                       ></v-text-field>
                     </v-col>
@@ -55,14 +45,12 @@
                       <v-text-field
                         label="密码"
                         type="password"
-                        :rules="notNullRules"
                         required
                         v-model="user.password"
                       ></v-text-field>
                     </v-col>
                   </v-row>
                 </v-container>
-                <small>请确认您使用自己的帐户</small>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -87,7 +75,6 @@ export default {
   name: "Login",
   data() {
     return {
-      notNullRules: [v => v !== "" || "不能为空"],
       user: {
         userId: "",
         name: "",

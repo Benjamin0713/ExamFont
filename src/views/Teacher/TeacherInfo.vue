@@ -82,7 +82,6 @@ export default {
         userId: ""
       }
     }
-    // rules: [value => !!value || "不能为空."]
   }),
   methods: {
     // 获取用户信息
