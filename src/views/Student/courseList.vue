@@ -38,21 +38,18 @@
           <el-table-column label="考试名称" prop="paperTitle"></el-table-column>
           <!--          <el-table-column label="开始时间" prop="startDate｜formatdate"></el-table-column>-->
           <el-table-column label="开始时间">
-            <template slot-scope="scope">{{
-                scope.row.startDate | format_date
-              }}
+            <template slot-scope="scope"
+            >{{ scope.row.startDate | format_date }}
             </template>
           </el-table-column>
           <el-table-column label="结束时间">
-            <template slot-scope="scope">{{
-                scope.row.endDate | format_date
-              }}
+            <template slot-scope="scope"
+            >{{ scope.row.endDate | format_date }}
             </template>
           </el-table-column>
           <el-table-column label="考试状态">
-            <template slot-scope="scope">{{
-                scope.row.status | determine
-              }}
+            <template slot-scope="scope"
+            >{{ scope.row.status | determine }}
             </template>
           </el-table-column>
           <el-table-column label="操作">

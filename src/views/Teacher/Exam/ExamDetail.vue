@@ -40,12 +40,12 @@
                   outlined
                   v-if="item.status"
                   @click="openStuentSheet(item.student.user.id)"
-                  >
-                    查看答题卡
-                    <v-icon right dark>keyboard_arrow_right</v-icon>
-                  </v-btn>
-                </td>
-              </tr>
+                >
+                  查看答题卡
+                  <v-icon right dark>keyboard_arrow_right</v-icon>
+                </v-btn>
+              </td>
+            </tr>
             </tbody>
           </template>
         </v-simple-table>
