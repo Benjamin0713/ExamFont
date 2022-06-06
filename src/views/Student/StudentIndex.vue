@@ -12,6 +12,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn class="ma-2" outlined @click="logOutAndClearStorage">退出</v-btn>
+    </v-app-bar>
     <!-- 主体内容 -->
     <v-main>
       <v-container fluid>
