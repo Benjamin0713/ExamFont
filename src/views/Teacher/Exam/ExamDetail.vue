@@ -1,4 +1,5 @@
 <template>
+  <div class="detail">
     <v-row align="center" class="mx-auto" justify="center">
       <v-toolbar-title
         ><h3>{{ examDetail.name }}</h3>
